@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Versión A</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96); /* Degradado suave */
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #333;
+            font-weight: 700;
+            font-size: 1.8em;
+        }
+
+        .icon-top {
+            font-size: 3em;
+            color: #3f2b96;
+            margin-bottom: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: calc(100% - 40px);
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #3f2b96;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(63, 43, 150, 0.2);
+        }
+
+        .input-group .material-icons {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.3em;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3f2b96; /* Color primario */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #5a40b3; /* Tono más claro al pasar el ratón */
+            transform: translateY(-2px);
+        }
+
+        .link-text {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .link-text a {
+            color: #3f2b96;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .link-text a:hover {
+            color: #5a40b3;
+            text-decoration: underline;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6c757d; /* A neutral color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="material-icons icon-top">person</span>
+        <h2>Crea tu Cuenta</h2>
+        
+        <div class="input-group">
+            <span class="material-icons">email</span>
+            <input type="email" placeholder="Correo Electrónico" required>
+        </div>
+        
+        <div class="input-group">
+            <span class="material-icons">lock</span>
+            <input type="password" placeholder="Contraseña" required>
+        </div>
+        
+        <div class="input-group">
+            <span class="material-icons">lock</span>
+            <input type="password" placeholder="Confirmar Contraseña" required>
+        </div>
+
+        <div class="input-group">
+            <span class="material-icons">person</span>
+            <input type="text" placeholder="Nombre Completo" required>
+        </div>
+        
+        <button type="submit">Registrarse</button>
+        
+        <p class="link-text">¿Ya tienes cuenta? <a href="#">Inicia Sesión</a></p>
+        <a href="Explicación.html" class="back-button">Volver</a>
+    </div>
+</body>
+</html>

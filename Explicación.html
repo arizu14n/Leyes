@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leyes de Occam y Parkinson en UX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .laws-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .law-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .law-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .law-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4338ca;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .law-icon {
+            font-size: 2rem;
+        }
+
+        .law-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .law-principle {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 8px;
+            padding: 1rem;
+            font-style: italic;
+            color: #374151;
+            border-left: 4px solid #4338ca;
+        }
+
+        .connection-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .connection-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4338ca;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .connection-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #4b5563;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .examples-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .example-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .example-content {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .good-bad-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-card {
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .good-card {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .bad-card {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .comparison-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comparison-list {
+            list-style: none;
+            line-height: 1.8;
+        }
+
+        .comparison-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .comparison-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .bad-card .comparison-list li::before {
+            content: "✗";
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .takeaway-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .takeaway-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .laws-container,
+            .good-bad-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .example-button {
+            display: inline-block;
+            background-color: white;
+            color: #4338ca;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .example-button:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Leyes de Occam y Parkinson</h1>
+            <p>Principios fundamentales para el diseño UX</p>
+        </div>
+
+        <!-- Laws Section -->
+        <div class="laws-container">
+            <div class="law-card">
+                <h2 class="law-title">
+                    <span class="law-icon">🗡️</span>
+                    Ley de Occam
+                </h2>
+                <p class="law-description">
+                    También conocida como "Navaja de Occam", establece que entre varias explicaciones posibles, la más simple suele ser la correcta.
+                </p>
+                <div class="law-principle">
+                    "La solución más simple es generalmente la mejor solución"
+                </div>
+            </div>
+
+            <div class="law-card">
+                <h2 class="law-title">
+                    <span class="law-icon">⏱️</span>
+                    Ley de Parkinson
+                </h2>
+                <p class="law-description">
+                    Establece que una tarea se expande hasta llenar el tiempo disponible para completarla. En UX, esto significa que los usuarios tomarán más tiempo en interfaces complejas.
+                </p>
+                <div class="law-principle">
+                    "El trabajo se expande hasta llenar el tiempo disponible"
+                </div>
+            </div>
+        </div>
+
+        <!-- Connection Section -->
+        <div class="connection-section">
+            <h2 class="connection-title">¿Cómo se relacionan?</h2>
+            <p class="connection-content">
+                Ambas leyes convergen en un principio fundamental: <strong>la simplicidad mejora la experiencia</strong>. 
+                Occam nos dice que eliminemos lo innecesario, mientras que Parkinson nos recuerda que la complejidad 
+                aumenta el tiempo y esfuerzo del usuario. Juntas forman la base del diseño centrado en el usuario.
+            </p>
+        </div>
+
+        <!-- Examples Section -->
+        <div class="examples-section">
+            <h2 class="section-title">Ejemplos Cotidianos</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h3 class="example-title">🔍 Google vs Yahoo (2000s)</h3>
+                    <p class="example-content">
+                        Google triunfó con una página simple con solo una barra de búsqueda, mientras Yahoo tenía docenas de links y categorías. La simplicidad ganó.
+                    </p>
+                </div>
+
+                <div class="example-card">
+                    <h3 class="example-title">🛒 Checkout de Amazon</h3>
+                    <p class="example-content">
+                        "Compra en 1-Click" elimina pasos innecesarios. Menos campos = menos tiempo = más conversiones.
+                    </p>
+                </div>
+
+                <div class="example-card">
+                    <h3 class="example-title">📱 iPhone vs Blackberry</h3>
+                    <p class="example-content">
+                        iPhone eliminó el teclado físico y simplificó la interfaz. Blackberry mantuvo la complejidad y perdió el mercado.
+                    </p>
+                </div>
+
+                <div class="example-card">
+                    <h3 class="example-title">🎵 Spotify vs iTunes</h3>
+                    <p class="example-content">
+                        Spotify simplificó el acceso a música: buscar y reproducir. iTunes requería comprar, descargar, organizar, sincronizar.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Good vs Bad Comparison -->
+        <div class="good-bad-comparison">
+            <div class="comparison-card good-card">
+                <h3 class="comparison-title">
+                    <span>✅</span>
+                    Diseño que Respeta las Leyes
+                </h3>
+                <ul class="comparison-list">
+                    <li>Solo campos esenciales</li>
+                    <li>Un objetivo claro por pantalla</li>
+                    <li>Flujo lineal y directo</li>
+                    <li>Carga cognitiva mínima</li>
+                    <li>Registro en 30 segundos</li>
+                </ul>
+                <a href="Registro_Version_A.html" class="example-button">Ver Ejemplo</a>
+            </div>
+
+            <div class="comparison-card bad-card">
+                <h3 class="comparison-title">
+                    <span>❌</span>
+                    Diseño que las Viola
+                </h3>
+                <ul class="comparison-list">
+                    <li>Campos innecesarios</li>
+                    <li>Múltiples acciones confusas</li>
+                    <li>Elementos distractores</li>
+                    <li>Sobrecarga de información</li>
+                    <li>Proceso largo y frustrante</li>
+                </ul>
+                <a href="Registro_Version_B.html" class="example-button">Ver Ejemplo</a>
+            </div>
+        </div>
+
+        <!-- Key Takeaway -->
+        <div class="key-takeaway">
+            <h3 class="takeaway-title">💡 Mensaje Clave</h3>
+            <p class="takeaway-text">
+                "Cada elemento que agregues a tu interfaz debe justificar su existencia. 
+                Si no ayuda al usuario a completar su tarea principal, está estorbando."
+            </p>
+        </div>
+    </div>
+</body>
+</html>

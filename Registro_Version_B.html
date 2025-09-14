@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Versión B (Caótico)</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Fondo que denota inestabilidad */
+            color: #444;
+            overflow: hidden; /* Para manejar elementos fuera de lugar */
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative; /* Para posicionar elementos internos */
+            border: 3px dashed #d9534f; /* Borde de advertencia */
+            box-sizing: border-box;
+            transform: rotate(-2deg); /* Ligeramente inclinado para dar sensación de desorden */
+        }
+
+        h2 {
+            font-family: 'Creepster', cursive; /* Fuente que denota peligro/caos */
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #d9534f; /* Rojo de advertencia */
+            font-size: 2.5em;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 span {
+            display: block;
+            font-size: 0.6em;
+            color: #666;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+
+        .icon-top-chaos {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        .icon-top-chaos .material-icons {
+            font-size: 2.5em;
+            color: #d9534f;
+            margin: 0 -10px;
+            transform: rotate(15deg);
+        }
+        .icon-top-chaos .material-icons:nth-child(even) {
+            transform: rotate(-15deg);
+        }
+
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+            text-align: left;
+            opacity: 0.9;
+        }
+
+        .input-group input {
+            width: calc(100% - 40px);
+            padding: 10px 15px 10px 40px;
+            border: 2px solid #d9534f; /* Borde rojo */
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            background-color: #ffeaea; /* Fondo rojizo */
+            color: #333;
+        }
+
+        .input-group .material-icons {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d9534f;
+            font-size: 1.2em;
+        }
+
+        .warning-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d9534f;
+            font-size: 1.5em;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: #d9534f;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+
+        .overlay-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            transform: rotate(5deg);
+            width: 70%;
+            left: 10%;
+            top: 15%;
+            text-align: left;
+            animation: bounce 1s infinite alternate; /* Animación para llamar la atención */
+        }
+        .overlay-card .material-icons {
+            font-size: 3em;
+            color: #ffc107;
+            float: left;
+            margin-right: 10px;
+        }
+        .overlay-card p {
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #333;
+        }
+        .overlay-card button {
+            background-color: #ffc107;
+            color: #333;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            margin-top: 10px;
+            border-radius: 5px;
+            float: right;
+            border: none;
+            cursor: pointer;
+        }
+        .overlay-card .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+        }
+
+
+        .small-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 8px;
+            position: absolute;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            text-align: left;
+            font-size: 0.8em;
+            line-height: 1.2;
+            color: #333;
+        }
+        #tooltip1 { top: 10%; left: -100px; transform: rotate(-10deg); }
+        #tooltip2 { top: 40%; right: -120px; transform: rotate(8deg); }
+
+
+        button.main-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #dc3545; /* Rojo fuerte para botón principal */
+            color: white;
+            border: 2px dashed #a71d2a;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+            transform: rotate(-3deg);
+            margin-bottom: 10px;
+        }
+
+        button.main-button::before {
+            content: '!!';
+            position: absolute;
+            left: 10px;
+            font-size: 0.8em;
+            color: yellow;
+            animation: blink 0.5s infinite alternate;
+        }
+
+        button.main-button::after {
+            content: '!!';
+            position: absolute;
+            right: 10px;
+            font-size: 0.8em;
+            color: yellow;
+            animation: blink 0.5s infinite alternate reverse;
+        }
+
+        button.main-button:hover {
+            background-color: #c82333;
+        }
+
+        .link-text {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .link-text a {
+            color: #007bff;
+            text-decoration: underline;
+            font-weight: 700;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+        .link-text a.attention {
+            color: #d9534f;
+            animation: pulse 1.5s infinite;
+        }
+
+        .link-text a:hover {
+            color: #0056b3;
+        }
+
+        .extra-input {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #6c757d;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 0.7em;
+            z-index: 1;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        #extra1 { top: 20%; left: -80px; transform: rotate(10deg); }
+        #extra2 { top: 60%; right: -90px; transform: rotate(-15deg); }
+        #extra3 { bottom: 10%; left: 20%; transform: rotate(5deg); }
+
+
+        /* Animaciones */
+        @keyframes bounce {
+            0% { transform: rotate(5deg) translateY(0); }
+            100% { transform: rotate(5deg) translateY(-5px); }
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); color: #e62e4a; }
+            100% { transform: scale(1); }
+        }
+
+        /* Campos adicionales superpuestos para el caos */
+        .ghost-input {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            color: #888;
+            pointer-events: none; /* No interactuable */
+            opacity: 0.7;
+            transform: rotate(random(-5deg, 5deg)); /* Ligeramente rotado */
+        }
+
+        #ghost1 { top: 10px; left: 10px; width: 150px; transform: rotate(-5deg); }
+        #ghost2 { top: 70px; right: 20px; width: 120px; transform: rotate(3deg); }
+        #ghost3 { bottom: 30px; left: 30px; width: 180px; transform: rotate(7deg); }
+        #ghost4 { top: 50%; left: -50px; width: 100px; transform: rotate(-8deg); }
+        #ghost5 { top: 20%; right: -70px; width: 130px; transform: rotate(12deg); }
+        
+        .back-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-top-chaos">
+            <span class="material-icons">person</span>
+            <span class="material-icons">person</span>
+            <span class="material-icons">person</span>
+            <span class="material-icons">person</span>
+            <span class="material-icons">person</span>
+        </div>
+        <h2>CREAR CUENTA <br> <span>(¿EN SERIO?)</span></h2>
+        
+        <div class="input-group">
+            <label>Correo</label>
+            <span class="material-icons">email</span>
+            <input type="email" placeholder="Correo Electrónico (Principal)" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <div class="input-group">
+            <label>Nombre Completo</label>
+            <span class="material-icons">person</span>
+            <input type="text" placeholder="Primer Nombre" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <div class="input-group">
+            <label>Apellido</label>
+            <span class="material-icons">person</span>
+            <input type="text" placeholder="Segundo Nombre (Opcional)" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+        
+        <div class="input-group">
+            <label>Contraseña</label>
+            <span class="material-icons">lock</span>
+            <input type="password" placeholder="PIN Secreto (4-10 dígitos)" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <div class="input-group">
+            <label>Confirma tu Contraseña</label>
+            <span class="material-icons">lock</span>
+            <input type="password" placeholder="Confirma tu Contraseña" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <div class="input-group">
+            <label>Fecha de Nacimiento</label>
+            <span class="material-icons">calendar_today</span>
+            <input type="date" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <div class="input-group">
+            <label>Color Favorito (Hex)</label>
+            <span class="material-icons">color_lens</span>
+            <input type="text" placeholder="#RRGGBB" required>
+            <span class="material-icons warning-icon">error_outline</span>
+        </div>
+
+        <button class="main-button" type="submit">¡Registrarse (Obligatorio)!</button>
+        
+        <p class="link-text">
+            ¿Ya tienes cuenta? <a href="#">Inicia Sesión</a> | 
+            <a class="attention" href="#">Términos y Condiciones (LEER TODO)</a> | 
+            <a href="#">Ayuda (¡No podemos ayudarte!)</a>
+        </p>
+        <a href="Explicación.html" class="back-button">Volver</a>
+
+        <!-- Elementos adicionales para aumentar el caos visual -->
+        <div class="overlay-card">
+            <span class="material-icons">warning</span>
+            <button class="close-btn">X</button>
+            <p><b>Validación Humana:</b><br>¿Puedes sumar 2+2? (No usar calculadora)</p>
+            <button>Cancelar</button>
+        </div>
+
+        <div class="small-card" id="tooltip1">
+            <p>¡ERROR! Nombre de usuario no válido. Intenta de nuevo. <span class="material-icons">close</span></p>
+        </div>
+        <div class="small-card" id="tooltip2">
+            <p>Campo requerido: "Coordinación Ojo-Mano". <span class="material-icons">info</span></p>
+        </div>
+
+        <input type="text" class="extra-input" id="extra1" placeholder="Código Secreto...">
+        <input type="text" class="extra-input" id="extra2" placeholder="ID de Usuario Aleatorio...">
+        <input type="text" class="extra-input" id="extra3" placeholder="Correo Electrónico Secundario...">
+
+        <!-- Campos fantasma para más desorden -->
+        <input type="text" class="ghost-input" id="ghost1" value="Correo electrónico antiguo..." readonly>
+        <input type="text" class="ghost-input" id="ghost2" value="Tu ID de miembro..." readonly>
+        <input type="text" class="ghost-input" id="ghost3" value="Confirmar contraseña de nuevo..." readonly>
+        <input type="text" class="ghost-input" id="ghost4" value="¡Usa otra contraseña!" readonly>
+        <input type="text" class="ghost-input" id="ghost5" value="Alias de usuario..." readonly>
+
+    </div>
+</body>
+</html>
